@@ -1,11 +1,11 @@
 import React from "react";
 
-const Content = ({ currentData }) => {
+const Content = ({ currentData, handleClick }) => {
     return (
         <div className="content">
             {currentData.map((data, index) => {
                 return (
-                    <div className="cards" key={index}>
+                    <div className="cards" key={index} onClick={() => handleClick(data)}>
                         <img src={data.flags.png} alt="" className="img" />
                         <div className="info">
                             <h3>{data.name}</h3>

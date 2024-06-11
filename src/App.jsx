@@ -4,14 +4,23 @@ import useDebounce from "./Function/useDebounce";
 import Header from "./Components/Header";
 import Content from "./Components/Content";
 import Pagination from "./Components/Pagination";
+import ModalBox from "./Components/ModalBox";
 
 function App() {
     const [apiData, setApiData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [valueSelect, setValueSelect] = useState("");
+    const [modal, setModal] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
     const itemPerPage = 8;
 
+    // useDebounce untuk mengurangi load data setiap 1 detik
+    // https://www.npmjs.com/package/use-debounce
+    // https://www.freecodecamp.org/news/javascript-debounce-example/
+    // https://usehooks.com/useDebounce/
+    // https://stackoverflow.com/questions/57269229/how-to-debounce-a-function-in-react
+    // https://www.freecodecamp.org/news/debouncing-in-react-js/
     const debounceText = useDebounce(searchTerm, 1000);
 
     const filteredData = apiData.filter((data) => {
@@ -57,15 +66,31 @@ function App() {
 
     const region = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
+    const handleClick = (data) => {
+        setModal(data);
+        setOpenModal(!openModal);
+    };
+
+    const handleModal = () => {
+        setOpenModal(!openModal);
+        setModal([]);
+    };
+
     return (
         <section>
             <header>
                 <Navbar />
             </header>
             <main className="container">
-                <Header handleSearch={handleSearch} searchTerm={searchTerm} valueSelect={valueSelect} handleSelect={handleSelect} region={region} />
-                <Content currentData={currentData} />
-                {totalPage > 1 && <Pagination page={page} setPage={setPage} totalPage={totalPage} />}
+                {!openModal ? (
+                    <>
+                        <Header handleSearch={handleSearch} searchTerm={searchTerm} valueSelect={valueSelect} handleSelect={handleSelect} region={region} />
+                        <Content currentData={currentData} handleClick={handleClick} />
+                        {totalPage > 1 && <Pagination page={page} setPage={setPage} totalPage={totalPage} />}
+                    </>
+                ) : (
+                    <ModalBox handleModal={handleModal} modal={modal} />
+                )}
             </main>
         </section>
     );
