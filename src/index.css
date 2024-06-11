@@ -330,6 +330,7 @@ nav {
                 img {
                     width: 400px;
                     object-fit: cover;
+                    box-shadow: 2px 2px 10px var(--text-color);
                 }
             }
 
@@ -356,6 +357,16 @@ nav {
                             font-weight: 700;
                         }
                     }
+
+                    .details-right {
+                        & p:last-child {
+                            overflow: hidden;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 1;
+                            max-width: 250px;
+                        }
+                    }
                 }
 
                 .modal-borders {
@@ -372,7 +383,7 @@ nav {
                         display: flex;
                         gap: 10px;
 
-                        p {
+                        .borders-btn {
                             padding: 1px 5px;
                             border-radius: 5px;
                             background: var(--elements);
@@ -409,6 +420,20 @@ nav {
 
                 #input-search {
                     width: 100%;
+                }
+            }
+        }
+
+        .modal-container {
+            .modal-detail {
+                .modal-info {
+                    .details {
+                        .details-right {
+                            & p:last-child {
+                                max-width: 100%;
+                            }
+                        }
+                    }
                 }
             }
         }

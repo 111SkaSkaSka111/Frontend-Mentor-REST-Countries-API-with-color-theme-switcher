@@ -1,7 +1,7 @@
 import React from "react";
 
-const ModalBox = ({ handleModal, modal }) => {
-    const [languages] = modal.languages.map((item) => Object.values(item));
+const ModalBox = ({ handleModal, modal, handleAlphaCode }) => {
+    const languages = modal.languages.map((item) => Object.values(item)[0]);
 
     return (
         <div className="modal-container">
@@ -50,9 +50,15 @@ const ModalBox = ({ handleModal, modal }) => {
                     <div className="modal-borders">
                         <p>Border Countries:</p>
                         <div className="borders">
-                            {modal.borders.map((item) => (
-                                <p key={item}>{item}</p>
-                            ))}
+                            {Array.isArray(modal.borders) && modal.borders.length > 0 ? (
+                                modal.borders.map((item) => (
+                                    <div key={item} className="borders-btn" onClick={() => handleAlphaCode(item)}>
+                                        {item}
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No borders</p>
+                            )}
                         </div>
                     </div>
                 </div>

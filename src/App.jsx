@@ -76,6 +76,13 @@ function App() {
         setModal([]);
     };
 
+    const handleAlphaCode = (code) => {
+        console.log(code);
+
+        const data = apiData.find((item) => item.alpha3Code === code);
+        setModal(data);
+    };
+
     return (
         <section>
             <header>
@@ -89,7 +96,7 @@ function App() {
                         {totalPage > 1 && <Pagination page={page} setPage={setPage} totalPage={totalPage} />}
                     </>
                 ) : (
-                    <ModalBox handleModal={handleModal} modal={modal} />
+                    <ModalBox handleModal={handleModal} modal={modal} handleAlphaCode={handleAlphaCode} />
                 )}
             </main>
         </section>
