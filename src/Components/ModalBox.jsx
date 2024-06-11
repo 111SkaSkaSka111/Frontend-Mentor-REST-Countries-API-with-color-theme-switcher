@@ -40,7 +40,7 @@ const ModalBox = ({ handleModal, modal }) => {
                                 <span>Top Level Domain:</span> {modal.topLevelDomain[0]}
                             </p>
                             <p>
-                                <span>Currencies:</span> {modal.currencies.name}
+                                <span>Currencies:</span> {modal.currencies[0].name}
                             </p>
                             <p>
                                 <span>Languages:</span> {languages.join(", ")}
